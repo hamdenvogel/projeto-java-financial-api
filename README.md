@@ -206,12 +206,14 @@ Resposta esperada:
 # POST /api/creditos
 Exemplo no Postman:
 http://localhost:8080/api/creditos
+(mais o payload descrito abaixo com um exemplo)
 
 Descrição: Request que cria um crédito constituído novo, com base nos dados (payload) da entrada.
 
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para inserção:
+Payload:
 
 {
     "numeroCredito": "9982541",
@@ -247,12 +249,14 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 # PUT /api/creditos
 Exemplo no Postman:
 http://localhost:8080/api/creditos
+(mais o payload descrito abaixo com um exemplo)
 
 Descrição: Request que altera um crédito constituído já existente, com base nos dados (payload) da entrada.
 
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para alteração:
+Payload:
 
 {
     "id": 5,
