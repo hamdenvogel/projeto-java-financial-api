@@ -16,23 +16,40 @@ Testes unitários (CreditoServiceTest, CreditoRepositoryTest) e testes de integr
 # Modelagem de Dados
 MODELAGEM DE DADOS
 Entidade Credito
-@Entity
-public class Credito {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
-private String numeroCredito;
-private String numeroNfse;
-private LocalDate dataConstituicao;
-private BigDecimal valorIssqn;
-private String tipoCredito;
-private boolean simplesNacional;
-private BigDecimal aliquota;
-private BigDecimal valorFaturado;
-private BigDecimal valorDeducao;
-private BigDecimal baseCalculo;
-}
 
+@Entity
+@Table(name = "credito", schema = "public")
+public class Credito implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private String numeroCredito;
+	
+	private String numeroNfse;
+	
+	private LocalDate dataConstituicao;
+	
+	private BigDecimal valorIssqn;
+	
+	private String tipoCredito;
+	
+	private boolean simplesNacional;
+	
+	private BigDecimal aliquota;
+	
+	private BigDecimal valorFaturado;
+	
+	private BigDecimal valorDeducao;
+	
+	private BigDecimal baseCalculo;
+
+{ .. }
+}
+ 
 # API completa com CRUD (Create (Criar), Read (Ler), Update (Atualizar) e Delete (Deletar))
 # Endpoints implementados:
 # GET /api/creditos/{numeroNfse}
