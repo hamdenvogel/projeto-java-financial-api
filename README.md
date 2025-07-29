@@ -21,18 +21,18 @@ Parâmetro:
 
 Resposta esperada:
 [
-{
-"numeroCredito": "123456",
-"numeroNfse": "7891011",
-"dataConstituicao": "2024-02-25",
-"valorIssqn": 1500.75,
-"tipoCredito": "ISSQN",
-"simplesNacional": "Sim",
-"aliquota": 5.0,
-"valorFaturado": 30000.00,
-"valorDeducao": 5000.00,
-"baseCalculo": 25000.00
-}
+  {
+    "numeroCredito": "123456",
+    "numeroNfse": "7891011",
+    "dataConstituicao": "2024-02-25",
+    "valorIssqn": 1500.75,
+    "tipoCredito": "ISSQN",
+    "simplesNacional": "Sim",
+    "aliquota": 5.0,
+    "valorFaturado": 30000.00,
+    "valorDeducao": 5000.00,
+    "baseCalculo": 25000.00
+  }
 ]
 
 # GET /api/creditos/credito/{numeroCredito}
@@ -43,21 +43,118 @@ Parâmetro:
 
 Resposta esperada:
 {
-"numeroCredito": "123456",
-"numeroNfse": "7891011",
-"dataConstituicao": "2024-02-25",
-"valorIssqn": 1500.75,
-"tipoCredito": "ISSQN",
-"simplesNacional": "Sim",
-"aliquota": 5.0,
-"valorFaturado": 30000.00,
-"valorDeducao": 5000.00,
-"baseCalculo": 25000.00
+  "numeroCredito": "123456",
+  "numeroNfse": "7891011",
+  "dataConstituicao": "2024-02-25",
+  "valorIssqn": 1500.75,
+  "tipoCredito": "ISSQN",
+  "simplesNacional": "Sim",
+  "aliquota": 5.0,
+  "valorFaturado": 30000.00,
+  "valorDeducao": 5000.00,
+  "baseCalculo": 25000.00
 }
 
+# GET /api/creditos/credito/{id}/id
+Descrição: Retorna os detalhes de um crédito constituído específico com base no id
+do crédito constituído.
+Parâmetro:
+● id (Long) - Id identificador do crédito constituído
 
+Resposta esperada:
+{
+  "id": 1,
+  "numeroCredito": "123456",
+  "numeroNfse": "7891011",
+  "dataConstituicao": "2024-02-25",
+  "valorIssqn": 1500.75,
+  "tipoCredito": "ISSQN",
+  "simplesNacional": true,
+  "aliquota": 5.00,
+  "valorFaturado": 30000.00,
+  "valorDeducao": 5000.00,
+  "baseCalculo": 25000.00
+}
 
+# POST /api/creditos
+Descrição: Cria um crédito constituído novo, com base nos dados (payload) da entrada.
+Parâmetro (payload):
+JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
+Exemplo de entrada válida de um Crédito Constituído para inserção:
+{
+    "numeroCredito": "9982541",
+    "numeroNfse": "3975109",
+    "dataConstituicao": "2025-06-24",
+    "valorIssqn": 1500.15,
+    "tipoCredito": "ISSQN",
+    "simplesNacional": true,
+    "aliquota": 7.80,
+    "valorFaturado": 6500.25,
+    "valorDeducao": 2500.25,
+    "baseCalculo": 80000.00
+}
 
+Resposta esperada:
+Código HTTP status de sucesso "201 Created"
+O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo banco de dados.
+{
+    "id": 6,
+    "numeroCredito": "9982541",
+    "numeroNfse": "3975109",
+    "dataConstituicao": "2025-06-24",
+    "valorIssqn": 1500.15,
+    "tipoCredito": "ISSQN",
+    "simplesNacional": true,
+    "aliquota": 7.80,
+    "valorFaturado": 6500.25,
+    "valorDeducao": 2500.25,
+    "baseCalculo": 80000.00
+}
+
+# PUT /api/creditos
+Descrição: altera um crédito constituído já existente, com base nos dados (payload) da entrada.
+Parâmetro (payload):
+JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
+Exemplo de entrada válida de um Crédito Constituído para alteração:
+{
+    "id": 5,
+    "numeroCredito": "284667",
+    "numeroNfse": "0012445",
+    "dataConstituicao": "2025-03-15",
+    "valorIssqn": 1800.15,
+    "tipoCredito": "ISSQN",
+    "simplesNacional": true,
+    "aliquota": 3.45,
+    "valorFaturado": 6800.50,
+    "valorDeducao": 80000.00,
+    "baseCalculo": 40000.00
+}
+
+Resposta esperada:
+Código HTTP status de sucesso "200 OK"
+O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo banco de dados.
+{
+    "id": 5,
+    "numeroCredito": "284667",
+    "numeroNfse": "0012445",
+    "dataConstituicao": "2025-03-15",
+    "valorIssqn": 1800.15,
+    "tipoCredito": "ISSQN",
+    "simplesNacional": true,
+    "aliquota": 3.45,
+    "valorFaturado": 6800.50,
+    "valorDeducao": 80000.00,
+    "baseCalculo": 40000.00
+}
+
+# DELETE /api/creditos/{id}
+Descrição: Remove (deleta) um crédito constituído específico com base no id
+do crédito constituído.
+Parâmetro:
+● id (Long) - Id identificador do crédito constituído
+
+Resposta esperada:
+Código HTTP status de sucesso "204 No Content"
 
 
 
