@@ -213,6 +213,7 @@ Descrição: Request que cria um crédito constituído novo, com base nos dados 
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para inserção:
+
 Payload:
 
 {
@@ -256,6 +257,7 @@ Descrição: Request que altera um crédito constituído já existente, com base
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para alteração:
+
 Payload:
 
 {
