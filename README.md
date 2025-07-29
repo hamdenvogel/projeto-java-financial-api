@@ -1,9 +1,20 @@
 # projeto-java-financial-api
 Sistema que implementa a API de Créditos Constituídos
+
 # Descrição:
 API RESTful utilizando Java Spring Boot para a consulta de créditos constituídos. A API fornecerá informações essenciais como número do crédito constituído, número da NFS-e, data da constituição do crédito, valor do ISSQN, tipo do crédito e outros atributos.
+
 # Requisitos técnicos:
-Java, Spring Boot, Spring Data JPA, Mapstruct, Beanutils, Jackson, JUnit, Mockito, Hibernate, Postgres
+- Java
+- Spring Boot
+- Spring Data JPA
+- Mapstruct
+- Beanutils
+- Jackson
+- JUnit
+- Mockito
+- Hibernate
+- Postgres
 
 # Código-fonte Java:
 - service layer
@@ -15,14 +26,17 @@ Java, Spring Boot, Spring Data JPA, Mapstruct, Beanutils, Jackson, JUnit, Mockit
 - exception
 - controller advice
 - unit/integration tests
-  
-# Tecnologias empregadas:
-Maven (versão 3.9.6)
-Java (versão 21)
-JUnit (versão 5)
-Postgres (versão 9.6.2)
+
+# Tecnologias empregadas
+- Maven (versão 3.9.6)
+- Java (versão 21)
+- JUnit (versão 5)
+- repository
+- Postgres (versão 9.6.2)
+
 # Testes automatizados - JUnit 5/Mockito
-Testes unitários (CreditoServiceTest, CreditoRepositoryTest) e testes de integração (CreditoControllerIntegrationTest)
+- Testes unitários (CreditoServiceTest, CreditoRepositoryTest)
+- testes de integração (CreditoControllerIntegrationTest)
 Total: 37 testes implementados.
 
 
@@ -34,7 +48,7 @@ Entidade Credito
 @Entity
 @Table(name = "credito", schema = "public")
 public class Credito implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
