@@ -153,6 +153,9 @@ Resposta esperada:
 ]
 
 # GET /api/creditos/credito/{numeroCredito}
+Exemplo no Postman:
+http://localhost:8080/api/creditos/credito/123456
+
 Descrição: Request que retorna os detalhes de um crédito constituído específico com base no número
 do crédito constituído.
 
@@ -175,6 +178,9 @@ Resposta esperada:
 }
 
 # GET /api/creditos/credito/{id}/id
+Exemplo no Postman:
+http://localhost:8080/api/creditos/credito/6/id
+
 Descrição: Request que retorna os detalhes de um crédito constituído específico com base no id
 do crédito constituído.
 
@@ -198,6 +204,9 @@ Resposta esperada:
 }
 
 # POST /api/creditos
+Exemplo no Postman:
+http://localhost:8080/api/creditos
+
 Descrição: Request que cria um crédito constituído novo, com base nos dados (payload) da entrada.
 
 Parâmetro (payload):
@@ -236,6 +245,9 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 }
 
 # PUT /api/creditos
+Exemplo no Postman:
+http://localhost:8080/api/creditos
+
 Descrição: Request que altera um crédito constituído já existente, com base nos dados (payload) da entrada.
 
 Parâmetro (payload):
@@ -275,6 +287,9 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 }
 
 # DELETE /api/creditos/{id}
+Exemplo no Postman:
+http://localhost:8080/api/creditos/5
+
 Descrição: Request que remove (deleta) um crédito constituído específico com base no id
 do crédito constituído.
 
