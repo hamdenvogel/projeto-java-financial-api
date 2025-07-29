@@ -53,27 +53,45 @@ public class Credito implements Serializable {
 # Script de Criação da Tabela
 
 CREATE TABLE public.credito (
+
 	id bigserial NOT NULL,
+ 
 	numero_credito varchar(50) NOT NULL,
+ 
 	numero_nfse varchar(50) NOT NULL,
+ 
 	data_constituicao date NOT NULL,
+ 
 	valor_issqn numeric(15, 2) NOT NULL,
+ 
 	tipo_credito varchar(50) NOT NULL,
+ 
 	simples_nacional bool NOT NULL,
+ 
 	aliquota numeric(5, 2) NOT NULL,
+ 
 	valor_faturado numeric(15, 2) NOT NULL,
+ 
 	valor_deducao numeric(15, 2) NOT NULL,
+ 
 	base_calculo numeric(15, 2) NOT NULL,
+ 
 	CONSTRAINT credito_pkey PRIMARY KEY (id)
+ 
 );
 
 # Script de População da Tabela
 
 INSERT INTO public.credito (numero_credito,numero_nfse,data_constituicao,valor_issqn,tipo_credito,simples_nacional,aliquota,valor_faturado,valor_deducao,base_calculo) VALUES
+
 	 ('123456','7891011','2024-02-25',1500.75,'ISSQN',true,5.00,30000.00,5000.00,25000.00),
+  
 	 ('789012','7891011','2024-02-26',1200.50,'ISSQN',false,4.50,25000.00,4000.00,21000.00),
+  
 	 ('654321','1122334','2024-01-15',800.50,'Outros',true,3.50,20000.00,3000.00,17000.00),
+  
 	 ('9982541','3975109','2025-06-24',1500.15,'ISSQN',true,7.80,6500.25,2500.25,80000.00);
+  
 
  
 # API completa com CRUD (Create (Criar), Read (Ler), Update (Atualizar) e Delete (Deletar))
