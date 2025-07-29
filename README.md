@@ -14,6 +14,7 @@ Testes unitários (CreditoServiceTest, CreditoRepositoryTest) e testes de integr
 
 
 # Modelagem de Dados
+
 MODELAGEM DE DADOS
 Entidade Credito
 
@@ -52,6 +53,7 @@ public class Credito implements Serializable {
 
 # Script de Criação da Tabela
 
+
 CREATE TABLE public.credito (
 
 	id bigserial NOT NULL,
@@ -81,6 +83,7 @@ CREATE TABLE public.credito (
 );
 
 # Script de População da Tabela
+
 
 INSERT INTO public.credito (numero_credito,numero_nfse,data_constituicao,valor_issqn,tipo_credito,simples_nacional,aliquota,valor_faturado,valor_deducao,base_calculo) VALUES
 
