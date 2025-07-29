@@ -127,6 +127,9 @@ INSERT INTO public.credito (numero_credito,numero_nfse,data_constituicao,valor_i
 # API completa com CRUD => Create (Criar), Read (Ler), Update (Atualizar) e Delete (Deletar)
 # Endpoints implementados:
 # GET /api/creditos/{numeroNfse}
+Exemplo no Postman:
+http://localhost:8080/api/creditos/7891011
+
 Descrição: Request que retorna uma lista de créditos constituídos com base no número da NFS-e.
 
 Parâmetro:
