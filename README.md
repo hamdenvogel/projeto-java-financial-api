@@ -11,11 +11,32 @@ JUnit (versão 5)
 Postgres (versão 9.6.2)
 # Testes automatizados - JUnit 5/Mockito
 Testes unitários (CreditoServiceTest, CreditoRepositoryTest) e testes de integração (CreditoControllerIntegrationTest)
-# API completa com CRUD
 
-# Requests:
+
+# Modelagem de Dados
+MODELAGEM DE DADOS
+Entidade Credito
+@Entity
+public class Credito {
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+private String numeroCredito;
+private String numeroNfse;
+private LocalDate dataConstituicao;
+private BigDecimal valorIssqn;
+private String tipoCredito;
+private boolean simplesNacional;
+private BigDecimal aliquota;
+private BigDecimal valorFaturado;
+private BigDecimal valorDeducao;
+private BigDecimal baseCalculo;
+}
+
+# API completa com CRUD (Create (Criar), Read (Ler), Update (Atualizar) e Delete (Deletar))
+# Endpoints implementados:
 # GET /api/creditos/{numeroNfse}
-Descrição: Retorna uma lista de créditos constituídos com base no número da NFS-e.
+Descrição: Request que retorna uma lista de créditos constituídos com base no número da NFS-e.
 Parâmetro:
 · numeroNfse (String) - Número identificador da NFS-e
 
@@ -37,7 +58,7 @@ Resposta esperada:
 ]
 
 # GET /api/creditos/credito/{numeroCredito}
-Descrição: Retorna os detalhes de um crédito constituído específico com base no número
+Descrição: Request que retorna os detalhes de um crédito constituído específico com base no número
 do crédito constituído.
 Parâmetro:
 ● numeroCredito (String) - Número identificador do crédito constituído
@@ -58,7 +79,7 @@ Resposta esperada:
 }
 
 # GET /api/creditos/credito/{id}/id
-Descrição: Retorna os detalhes de um crédito constituído específico com base no id
+Descrição: Request que retorna os detalhes de um crédito constituído específico com base no id
 do crédito constituído.
 Parâmetro:
 ● id (Long) - Id identificador do crédito constituído
@@ -80,7 +101,7 @@ Resposta esperada:
 }
 
 # POST /api/creditos
-Descrição: Cria um crédito constituído novo, com base nos dados (payload) da entrada.
+Descrição: Request que cria um crédito constituído novo, com base nos dados (payload) da entrada.
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para inserção:
@@ -117,7 +138,7 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 }
 
 # PUT /api/creditos
-Descrição: altera um crédito constituído já existente, com base nos dados (payload) da entrada.
+Descrição: Request que altera um crédito constituído já existente, com base nos dados (payload) da entrada.
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para alteração:
@@ -155,13 +176,14 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 }
 
 # DELETE /api/creditos/{id}
-Descrição: Remove (deleta) um crédito constituído específico com base no id
+Descrição: Request que remove (deleta) um crédito constituído específico com base no id
 do crédito constituído.
 Parâmetro:
 ● id (Long) - Id identificador do crédito constituído
 
 Resposta esperada:
 Código HTTP status de sucesso "204 No Content"
+
 
 
 
