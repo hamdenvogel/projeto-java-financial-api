@@ -128,6 +128,7 @@ INSERT INTO public.credito (numero_credito,numero_nfse,data_constituicao,valor_i
 # Endpoints implementados:
 # GET /api/creditos/{numeroNfse}
 Descrição: Request que retorna uma lista de créditos constituídos com base no número da NFS-e.
+
 Parâmetro:
 · numeroNfse (String) - Número identificador da NFS-e
 
@@ -151,6 +152,7 @@ Resposta esperada:
 # GET /api/creditos/credito/{numeroCredito}
 Descrição: Request que retorna os detalhes de um crédito constituído específico com base no número
 do crédito constituído.
+
 Parâmetro:
 ● numeroCredito (String) - Número identificador do crédito constituído
 
@@ -172,6 +174,7 @@ Resposta esperada:
 # GET /api/creditos/credito/{id}/id
 Descrição: Request que retorna os detalhes de um crédito constituído específico com base no id
 do crédito constituído.
+
 Parâmetro:
 ● id (Long) - Id identificador do crédito constituído
 
@@ -193,6 +196,7 @@ Resposta esperada:
 
 # POST /api/creditos
 Descrição: Request que cria um crédito constituído novo, com base nos dados (payload) da entrada.
+
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para inserção:
@@ -230,6 +234,7 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 
 # PUT /api/creditos
 Descrição: Request que altera um crédito constituído já existente, com base nos dados (payload) da entrada.
+
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para alteração:
