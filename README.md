@@ -8,13 +8,13 @@ Java, Spring Boot, Spring Data JPA, Mapstruct, Beanutils, Jackson, JUnit, Mockit
 # Código-fonte Java:
 - service layer
 - repository
-- controller unit & integration
+- controller unit
 - dto
 - mapper
 - entity getter/setter
 - exception
 - controller advice
-- unit tests
+- unit/integration tests
   
 # Tecnologias empregadas:
 Maven (versão 3.9.6)
