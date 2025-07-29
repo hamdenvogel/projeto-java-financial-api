@@ -18,6 +18,7 @@ Testes unitários (CreditoServiceTest, CreditoRepositoryTest) e testes de integr
 Descrição: Retorna uma lista de créditos constituídos com base no número da NFS-e.
 Parâmetro:
 · numeroNfse (String) - Número identificador da NFS-e
+
 Resposta esperada:
 [
 {
@@ -39,6 +40,7 @@ Descrição: Retorna os detalhes de um crédito constituído específico com bas
 do crédito constituído.
 Parâmetro:
 ● numeroCredito (String) - Número identificador do crédito constituído
+
 Resposta esperada:
 {
 "numeroCredito": "123456",
@@ -52,6 +54,8 @@ Resposta esperada:
 "valorDeducao": 5000.00,
 "baseCalculo": 25000.00
 }
+
+
 
 
 
