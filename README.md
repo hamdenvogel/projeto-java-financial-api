@@ -4,6 +4,18 @@ Sistema que implementa a API de Créditos Constituídos
 API RESTful utilizando Java Spring Boot para a consulta de créditos constituídos. A API fornecerá informações essenciais como número do crédito constituído, número da NFS-e, data da constituição do crédito, valor do ISSQN, tipo do crédito e outros atributos.
 # Requisitos técnicos:
 Java, Spring Boot, Spring Data JPA, Mapstruct, Beanutils, Jackson, JUnit, Mockito, Hibernate, Postgres
+
+# Código-fonte Java:
+- service layer
+- repository
+- controller unit & integration
+- dto
+- mapper
+- entity getter/setter
+- exception
+- controller advice
+- unit tests
+  
 # Tecnologias empregadas:
 Maven (versão 3.9.6)
 Java (versão 21)
