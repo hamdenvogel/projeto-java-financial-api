@@ -11,6 +11,7 @@ JUnit (versão 5)
 Postgres (versão 9.6.2)
 # Testes automatizados - JUnit 5/Mockito
 Testes unitários (CreditoServiceTest, CreditoRepositoryTest) e testes de integração (CreditoControllerIntegrationTest)
+Total: 37 testes implementados.
 
 
 # Modelagem de Dados
