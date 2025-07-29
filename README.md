@@ -20,6 +20,7 @@ Parâmetro:
 · numeroNfse (String) - Número identificador da NFS-e
 
 Resposta esperada:
+
 [
   {
     "numeroCredito": "123456",
@@ -42,6 +43,7 @@ Parâmetro:
 ● numeroCredito (String) - Número identificador do crédito constituído
 
 Resposta esperada:
+
 {
   "numeroCredito": "123456",
   "numeroNfse": "7891011",
@@ -62,6 +64,7 @@ Parâmetro:
 ● id (Long) - Id identificador do crédito constituído
 
 Resposta esperada:
+
 {
   "id": 1,
   "numeroCredito": "123456",
@@ -81,6 +84,7 @@ Descrição: Cria um crédito constituído novo, com base nos dados (payload) da
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para inserção:
+
 {
     "numeroCredito": "9982541",
     "numeroNfse": "3975109",
@@ -97,6 +101,7 @@ Exemplo de entrada válida de um Crédito Constituído para inserção:
 Resposta esperada:
 Código HTTP status de sucesso "201 Created"
 O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo banco de dados.
+
 {
     "id": 6,
     "numeroCredito": "9982541",
@@ -116,6 +121,7 @@ Descrição: altera um crédito constituído já existente, com base nos dados (
 Parâmetro (payload):
 JSON de entrada contendo como parâmetro os dados válidos de um objeto do tipo Crédito Constituído.
 Exemplo de entrada válida de um Crédito Constituído para alteração:
+
 {
     "id": 5,
     "numeroCredito": "284667",
@@ -133,6 +139,7 @@ Exemplo de entrada válida de um Crédito Constituído para alteração:
 Resposta esperada:
 Código HTTP status de sucesso "200 OK"
 O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo banco de dados.
+
 {
     "id": 5,
     "numeroCredito": "284667",
