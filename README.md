@@ -274,6 +274,7 @@ O objeto criado mais o campo auto-incremento "id" gerado automaticamente pelo ba
 # DELETE /api/creditos/{id}
 Descrição: Request que remove (deleta) um crédito constituído específico com base no id
 do crédito constituído.
+
 Parâmetro:
 ● id (Long) - Id identificador do crédito constituído
 
