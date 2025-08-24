@@ -88,6 +88,16 @@
 	        <groupId>com.fasterxml.jackson.datatype</groupId>
 	        <artifactId>jackson-datatype-jsr310</artifactId>
     	</dependency>
+    	<dependency>
+		  <groupId>org.jacoco</groupId>
+		  <artifactId>jacoco-maven-plugin</artifactId>
+		  <version>0.8.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.sonarsource.scanner.maven</groupId>
+		    <artifactId>sonar-maven-plugin</artifactId>
+		    <version>3.10.0.2594</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -138,6 +148,16 @@
 					    <compilerArg>-Amapstruct.defaultComponentModel=spring</compilerArg>
 					</compilerArgs>
 				    </configuration>
+			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <configuration>
+			        <argLine>
+			            -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+			            -Xshare:off
+			        </argLine>
+			    </configuration>
 			</plugin>
 		</plugins>
 	</build>
