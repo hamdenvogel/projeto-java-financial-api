@@ -70,11 +70,15 @@ public class CreditoServiceImpl implements CreditoService {
 			try {
 				 BeanUtils.copyProperties(c, creditoDTO);
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			} catch (InvocationTargetException e) {
 				e.printStackTrace();
 			}			
 		});
+		 
+		if (creditoExistente.isEmpty()) {
+			throw new CreditoNotFoundException("Crédito não encontrado");
+		}
 		CreditoDTO creditoAtualizado = creditoExistente.get();
 		return save(creditoAtualizado);
 	}
