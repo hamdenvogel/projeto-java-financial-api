@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,7 @@ public class CreditoServiceImpl implements CreditoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<CreditoDTO> findByNumeroNfse(String numeroNfse) {
-		return creditoRepository.findByNumeroNfse(numeroNfse).stream().map(creditoMapper::toDto).collect(Collectors.toList());
+		return creditoRepository.findByNumeroNfse(numeroNfse).stream().map(creditoMapper::toDto).toList();
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class CreditoServiceImpl implements CreditoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<CreditoDTO> findAllByOrderByIdAsc() {
-		return creditoRepository.findAllByOrderByIdAsc().stream().map(creditoMapper::toDto).collect(Collectors.toList());
+		return creditoRepository.findAllByOrderByIdAsc().stream().map(creditoMapper::toDto).toList();
 	}
 
 	@Override

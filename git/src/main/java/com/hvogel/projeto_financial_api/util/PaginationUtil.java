@@ -14,7 +14,7 @@ public class PaginationUtil {
 
     public static <T> HttpHeaders generatePaginationHttpHeaders(UriComponentsBuilder uriBuilder, Page<T> page) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-Total-Count", Long.toString(page.getTotalElements()));
+        headers.add(HEADER_X_TOTAL_COUNT, Long.toString(page.getTotalElements()));
         int pageNumber = page.getNumber();
         int pageSize = page.getSize();
         StringBuilder link = new StringBuilder();
@@ -32,10 +32,15 @@ public class PaginationUtil {
     }
 
     private static String prepareLink(UriComponentsBuilder uriBuilder, int pageNumber, int pageSize, String relType) {
-        return MessageFormat.format("<{0}>; rel=\"{1}\"", preparePageUri(uriBuilder, pageNumber, pageSize), relType);
+        return MessageFormat.format(HEADER_LINK_FORMAT, preparePageUri(uriBuilder, pageNumber, pageSize), relType);
     }
 
     private static String preparePageUri(UriComponentsBuilder uriBuilder, int pageNumber, int pageSize) {
-        return uriBuilder.replaceQueryParam("page", new Object[]{Integer.toString(pageNumber)}).replaceQueryParam("size", new Object[]{Integer.toString(pageSize)}).toUriString().replace(",", "%2C").replace(";", "%3B");
+        return uriBuilder
+                .replaceQueryParam("page", Integer.toString(pageNumber))
+                .replaceQueryParam("size", Integer.toString(pageSize))
+                .toUriString()
+                .replace(",", "%2C")
+                .replace(";", "%3B");
     }
 }
