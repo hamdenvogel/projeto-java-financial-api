@@ -6,18 +6,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
-public interface ResponseUtil {
-	
-	static <X> ResponseEntity<X> wrapOrNotFound(Optional<X> maybeResponse) {
-        return wrapOrNotFound(maybeResponse, (HttpHeaders)null);
+public final class ResponseUtil {
+
+    private ResponseUtil() {
+        // Utility class
     }
 
-    static <X> ResponseEntity<X> wrapOrNotFound(Optional<X> maybeResponse, HttpHeaders header) {
-        return (ResponseEntity)maybeResponse.map((response) -> {
-            return ((ResponseEntity.BodyBuilder)ResponseEntity.ok().headers(header)).body(response);
-        }).orElseThrow(() -> {
-            return new ResponseStatusException(HttpStatus.NOT_FOUND);
-        });
+    public static <X> ResponseEntity<X> wrapOrNotFound(Optional<X> maybeResponse) {
+        return wrapOrNotFound(maybeResponse, null);
     }
 
+    public static <X> ResponseEntity<X> wrapOrNotFound(Optional<X> maybeResponse, HttpHeaders header) {
+        return maybeResponse.map(response -> {
+            ResponseEntity.BodyBuilder builder = ResponseEntity.ok();
+            if (header != null) {
+                builder.headers(header);
+            }
+            return builder.body(response);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
 }

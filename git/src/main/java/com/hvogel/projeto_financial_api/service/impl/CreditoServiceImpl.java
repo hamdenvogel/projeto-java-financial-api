@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +20,11 @@ import com.hvogel.projeto_financial_api.service.CreditoService;
 
 @Service
 public class CreditoServiceImpl implements CreditoService {
-	
+	private static final Logger LOG = LoggerFactory.getLogger(CreditoServiceImpl.class);
+
 	private final CreditoRepository creditoRepository;
-	
-	private final CreditoMapper creditoMapper;	
+
+	private final CreditoMapper creditoMapper;
 
 	public CreditoServiceImpl(CreditoRepository creditoRepository, CreditoMapper creditoMapper) {
 		super();
@@ -45,9 +48,9 @@ public class CreditoServiceImpl implements CreditoService {
 	@Transactional
 	public CreditoDTO save(CreditoDTO creditoDTO) {
 		Credito credito = creditoMapper.toEntity(creditoDTO);
-		credito =  creditoRepository.save(credito);
+		credito = creditoRepository.save(credito);
 		return creditoMapper.toDto(credito);
-	}	
+	}
 
 	@Override
 	public Optional<CreditoDTO> findById(Long id) {
@@ -65,20 +68,21 @@ public class CreditoServiceImpl implements CreditoService {
 	@Transactional
 	public CreditoDTO update(CreditoDTO creditoDTO) {
 		Optional<CreditoDTO> creditoExistente = findById(creditoDTO.getId());
-		 creditoExistente.ifPresent(c -> {
+		// findById already throws CreditoNotFoundException if not found, so
+		// creditoExistente is present here.
+
+		creditoExistente.ifPresent(c -> {
 			try {
-				 BeanUtils.copyProperties(c, creditoDTO);
+				BeanUtils.copyProperties(c, creditoDTO);
 			} catch (IllegalAccessException e) {
-				System.out.println(e.getMessage());
+				LOG.error("Erro de acesso ao copiar propriedades", e);
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}			
+				LOG.error("Erro de invocação ao copiar propriedades", e);
+			}
 		});
-		 
-		if (creditoExistente.isEmpty()) {
-			throw new CreditoNotFoundException("Crédito não encontrado");
-		}
-		CreditoDTO creditoAtualizado = creditoExistente.get();
+
+		CreditoDTO creditoAtualizado = creditoExistente
+				.orElseThrow(() -> new CreditoNotFoundException("Crédito não encontrado"));
 		return save(creditoAtualizado);
 	}
 
@@ -89,8 +93,8 @@ public class CreditoServiceImpl implements CreditoService {
 		Optional<CreditoDTO> creditoExistente = findById(id);
 		creditoExistente.ifPresent(c -> {
 			Credito credito = creditoMapper.toEntity(c);
-			creditoRepository.delete(credito);		
-		}); 		
+			creditoRepository.delete(credito);
+		});
 	}
 
 }

@@ -17,78 +17,76 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
 import com.hvogel.projeto_financial_api.entity.Credito;
+import com.hvogel.projeto_financial_api.util.CreditoTestHelper;
 
-
-@DataJpaTest 
+@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class CreditoRepositoryTest {
-	
+class CreditoRepositoryTest {
+
 	@Autowired
 	private TestEntityManager entityManager;
-	
+
 	@Autowired
 	private CreditoRepository creditoRepository;
-	
+
 	private Credito credito1, credito2, credito3;
-	
+
 	@BeforeEach
-	public void setup() {
-		
-		credito1 = Credito.builder().id(1L).numeroCredito("123456").numeroNfse("7891011")
-				.dataConstituicao(LocalDate.of(2024, Month.FEBRUARY, 25)).valorIssqn(BigDecimal.valueOf(1500.75))
-				.tipoCredito("ISSQN").simplesNacional(Boolean.valueOf(true)).aliquota(BigDecimal.valueOf(5.0))
-				.valorFaturado(BigDecimal.valueOf(30000.00)).valorDeducao(BigDecimal.valueOf(5000.00))
-				.baseCalculo(BigDecimal.valueOf(25000.00))				
-				.build();	
-		
-		credito2 = Credito.builder().id(2L).numeroCredito("789012").numeroNfse("7891011")
-				.dataConstituicao(LocalDate.of(2024, Month.APRIL, 12)).valorIssqn(BigDecimal.valueOf(1200.50))
-				.tipoCredito("ISSQN").simplesNacional(Boolean.valueOf(true)).aliquota(BigDecimal.valueOf(4.5))
-				.valorFaturado(BigDecimal.valueOf(25000.00)).valorDeducao(BigDecimal.valueOf(4000.00))
-				.baseCalculo(BigDecimal.valueOf(21000.00))				
-				.build();
-	
+	void setup() {
+		credito1 = CreditoTestHelper.createCreditoPadrao();
+
+		credito2 = CreditoTestHelper.createCreditoPadrao();
+		credito2.setId(2L);
+		credito2.setNumeroCredito("789012");
+		credito2.setDataConstituicao(LocalDate.of(2024, Month.APRIL, 12));
+		credito2.setValorIssqn(BigDecimal.valueOf(1200.50));
+		credito2.setAliquota(BigDecimal.valueOf(4.5));
+		credito2.setValorFaturado(BigDecimal.valueOf(25000.00));
+		credito2.setValorDeducao(BigDecimal.valueOf(4000.00));
+		credito2.setBaseCalculo(BigDecimal.valueOf(21000.00));
+
 		entityManager.merge(credito1);
 		entityManager.merge(credito2);
-		entityManager.flush();			
+		entityManager.flush();
 	}
-	
+
 	@Test
-    public void deveExistirPorCreditoPorId() {
-	   boolean exists = creditoRepository.existsById(credito1.getId());
-       assertTrue(exists);
-    }
-	
+	void deveExistirPorCreditoPorId() {
+		boolean exists = creditoRepository.existsById(credito1.getId());
+		assertTrue(exists);
+	}
+
 	@Test
-	public void deveBuscarUmCreditoPorId() {
+	void deveBuscarUmCreditoPorId() {
 		Optional<Credito> creditoEncontrado = creditoRepository.findById(credito1.getId());
-		assertThat(creditoEncontrado.isPresent()).isTrue();		
+		assertThat(creditoEncontrado).isPresent();
 	}
-	
+
 	@Test
-	public void deveNaoRetornarCreditoQuandoOIdNaoExistir() {
+	void deveNaoRetornarCreditoQuandoOIdNaoExistir() {
 		Long idInexistente = -1L;
 		Optional<Credito> creditoNaoEncontrado = creditoRepository.findById(idInexistente);
-		assertThat(creditoNaoEncontrado.isEmpty()).isTrue();
+		assertThat(creditoNaoEncontrado).isEmpty();
 	}
-	
+
 	@Test
-	public void deveBuscarTodosOsCreditos() {
+	void deveBuscarTodosOsCreditos() {
 		List<Credito> listaCreditosEncontrados = creditoRepository.findAll();
 		assertNotNull(listaCreditosEncontrados);
 		assertFalse(listaCreditosEncontrados.isEmpty(), "A lista não deve estar vazia");
 	}
-	
+
 	@Test
-	public void deveProcurarPorNumeroDeCredito() {
+	void deveProcurarPorNumeroDeCredito() {
 		Optional<Credito> creditoOpt = creditoRepository.findByNumeroCredito(credito1.getNumeroCredito());
 		assertNotNull(creditoOpt);
 		assertTrue(creditoOpt.isPresent());
 	}
-	
+
 	@Test
-	public void deveNaoEncontrarNumeroDeCreditoInexistente() {
+	void deveNaoEncontrarNumeroDeCreditoInexistente() {
 		String numeroDeCreditoInexistente = "numeroCreditoInexistente";
 		Optional<Credito> creditoOpt = creditoRepository.findByNumeroCredito(numeroDeCreditoInexistente);
 		assertNotNull(creditoOpt);
@@ -96,50 +94,50 @@ public class CreditoRepositoryTest {
 	}
 
 	@Test
-	public void deveProcurarPorNumeroNFSE() {
+	void deveProcurarPorNumeroNFSE() {
 		List<Credito> listaNfse = creditoRepository.findByNumeroNfse(credito1.getNumeroNfse());
 		assertFalse(listaNfse.isEmpty(), "A lista não deve estar vazia");
 	}
-	
+
 	@Test
-	public void deveNaoEncontrarNumeroNFSEInexistente() {
+	void deveNaoEncontrarNumeroNFSEInexistente() {
 		String numeroNFSEInexistente = "numeroNFSEInexistente";
 		List<Credito> listaNfseVazia = creditoRepository.findByNumeroNfse(numeroNFSEInexistente);
 		assertTrue(listaNfseVazia.isEmpty(), "A lista deve estar vazia");
 	}
-	
+
 	@Test
-	public void deveDeletarUmCredito() {
+	void deveDeletarUmCredito() {
 		Credito credito = entityManager.find(Credito.class, credito1.getId());
 		creditoRepository.delete(credito);
 		Credito creditoInexistente = entityManager.find(Credito.class, credito1.getId());
 		assertThat(creditoInexistente).isNull();
 	}
-	
+
 	@Test
-	public void deveSalvarUmCredito() {
-		credito3 = Credito.builder().id(2L).numeroCredito("926163").numeroNfse("1146421")
+	void deveSalvarUmCredito() {
+		credito3 = Credito.builder().id(3L).numeroCredito("926163").numeroNfse("1146421")
 				.dataConstituicao(LocalDate.of(2024, Month.DECEMBER, 20)).valorIssqn(BigDecimal.valueOf(580.25))
-				.tipoCredito("ISSQN").simplesNacional(Boolean.valueOf(false)).aliquota(BigDecimal.valueOf(2.5))
+				.tipoCredito("ISSQN").simplesNacional(false).aliquota(BigDecimal.valueOf(2.5))
 				.valorFaturado(BigDecimal.valueOf(5800.75)).valorDeducao(BigDecimal.valueOf(1500.75))
-				.baseCalculo(BigDecimal.valueOf(8345.18))				
+				.baseCalculo(BigDecimal.valueOf(8345.18))
 				.build();
-	
-		entityManager.merge(credito3);		
-		entityManager.flush();	
+
+		entityManager.merge(credito3);
+		entityManager.flush();
 		Credito creditoSalvo = entityManager.find(Credito.class, credito3.getId());
 		assertThat(creditoSalvo.getAliquota()).isEqualTo(BigDecimal.valueOf(2.5));
 		assertThat(creditoSalvo.getDataConstituicao()).isEqualTo(LocalDate.of(2024, Month.DECEMBER, 20));
 	}
-	
+
 	@Test
-	public void deveAtualizarUmCredito() {
+	void deveAtualizarUmCredito() {
 		credito1.setAliquota(BigDecimal.valueOf(8.5));
 		credito1.setDataConstituicao(LocalDate.of(2024, Month.APRIL, 14));
 		creditoRepository.save(credito1);
 		Credito creditoAtualizado = entityManager.find(Credito.class, credito1.getId());
 		assertThat(creditoAtualizado.getAliquota()).isEqualTo(BigDecimal.valueOf(8.5));
-		assertThat(creditoAtualizado.getDataConstituicao()).isEqualTo(LocalDate.of(2024, Month.APRIL, 14));		
-	}		
-	
+		assertThat(creditoAtualizado.getDataConstituicao()).isEqualTo(LocalDate.of(2024, Month.APRIL, 14));
+	}
+
 }
