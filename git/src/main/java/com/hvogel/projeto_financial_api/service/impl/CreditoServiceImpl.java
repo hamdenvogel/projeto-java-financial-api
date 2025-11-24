@@ -4,9 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,11 @@ import com.hvogel.projeto_financial_api.service.CreditoService;
 
 @Service
 public class CreditoServiceImpl implements CreditoService {
-	
+	private static final Logger LOG = LoggerFactory.getLogger(CreditoServiceImpl.class);
+
 	private final CreditoRepository creditoRepository;
-	
-	private final CreditoMapper creditoMapper;	
+
+	private final CreditoMapper creditoMapper;
 
 	public CreditoServiceImpl(CreditoRepository creditoRepository, CreditoMapper creditoMapper) {
 		super();
@@ -39,16 +41,16 @@ public class CreditoServiceImpl implements CreditoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<CreditoDTO> findByNumeroNfse(String numeroNfse) {
-		return creditoRepository.findByNumeroNfse(numeroNfse).stream().map(creditoMapper::toDto).collect(Collectors.toList());
+		return creditoRepository.findByNumeroNfse(numeroNfse).stream().map(creditoMapper::toDto).toList();
 	}
 
 	@Override
 	@Transactional
 	public CreditoDTO save(CreditoDTO creditoDTO) {
 		Credito credito = creditoMapper.toEntity(creditoDTO);
-		credito =  creditoRepository.save(credito);
+		credito = creditoRepository.save(credito);
 		return creditoMapper.toDto(credito);
-	}	
+	}
 
 	@Override
 	public Optional<CreditoDTO> findById(Long id) {
@@ -59,23 +61,28 @@ public class CreditoServiceImpl implements CreditoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<CreditoDTO> findAllByOrderByIdAsc() {
-		return creditoRepository.findAllByOrderByIdAsc().stream().map(creditoMapper::toDto).collect(Collectors.toList());
+		return creditoRepository.findAllByOrderByIdAsc().stream().map(creditoMapper::toDto).toList();
 	}
 
 	@Override
 	@Transactional
 	public CreditoDTO update(CreditoDTO creditoDTO) {
 		Optional<CreditoDTO> creditoExistente = findById(creditoDTO.getId());
-		 creditoExistente.ifPresent(c -> {
+		// findById already throws CreditoNotFoundException if not found, so
+		// creditoExistente is present here.
+
+		creditoExistente.ifPresent(c -> {
 			try {
-				 BeanUtils.copyProperties(c, creditoDTO);
+				BeanUtils.copyProperties(c, creditoDTO);
 			} catch (IllegalAccessException e) {
-				e.printStackTrace();
+				LOG.error("Erro de acesso ao copiar propriedades", e);
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}			
+				LOG.error("Erro de invocação ao copiar propriedades", e);
+			}
 		});
-		CreditoDTO creditoAtualizado = creditoExistente.get();
+
+		CreditoDTO creditoAtualizado = creditoExistente
+				.orElseThrow(() -> new CreditoNotFoundException("Crédito não encontrado"));
 		return save(creditoAtualizado);
 	}
 
@@ -86,8 +93,8 @@ public class CreditoServiceImpl implements CreditoService {
 		Optional<CreditoDTO> creditoExistente = findById(id);
 		creditoExistente.ifPresent(c -> {
 			Credito credito = creditoMapper.toEntity(c);
-			creditoRepository.delete(credito);		
-		}); 		
+			creditoRepository.delete(credito);
+		});
 	}
 
 }
