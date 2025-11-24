@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler<T> {
+public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(CreditoNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleProductNotFoundException(CreditoNotFoundException ex) {
@@ -21,10 +21,9 @@ public class GlobalExceptionHandler<T> {
 
     // Processar demais exception handlers ...
     @ExceptionHandler(ConfigDataResourceNotFoundException.class)
-    public ResponseEntity<Object> handleResourceNotFoundException(T ex) {
+    public ResponseEntity<Object> handleResourceNotFoundException(ConfigDataResourceNotFoundException ex) {
         Map<String, Object> body = new HashMap<>();
-        body.put("message", ((Throwable) ex).getMessage());
-
+        body.put("message", ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
