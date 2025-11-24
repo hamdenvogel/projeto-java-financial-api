@@ -45,6 +45,11 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - Testes de integração (CreditoControllerIntegrationTest)
   Total: 61 testes implementados.
 
+# Cobertura de Testes (SonarQube)
+
+- Cobertura de Instruções: 96.8%
+- Link para o Dashboard: [SonarQube Dashboard](http://localhost:9000/dashboard?id=projeto-financial-api)
+
 # Modelagem de Dados
 
 MODELAGEM DE DADOS
@@ -381,5 +386,4 @@ Parâmetro:
 
 Resposta esperada:
 (Status 204 No Content) - Sem corpo de resposta.
-
 
