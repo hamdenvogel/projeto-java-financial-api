@@ -26,7 +26,7 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - JUnit 5
 - Mockito
 - Hibernate
-- Postgres / H2 Database
+- Postgres 9.6.2
 - SonarQube 9.9-community
 
 # Código-fonte Java:
@@ -41,7 +41,7 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - util
 - integration tests
 
-# Tecnologias empregadas
+# Tecnologias/Ferramentas utilizadas
 
 - Maven
 - Java (versão 21)
@@ -50,6 +50,7 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - Postgres (Runtime) / H2 (Runtime)
 - Docker
 - Sonar (versão 9.9 community)
+- Postman
 
 # IDE´s utilizadas
 
