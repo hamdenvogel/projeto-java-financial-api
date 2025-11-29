@@ -8,13 +8,12 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 
 # Configuração do Sonar:
 
-1. Instalar o Docker
+1. Instalar o Docker (https://docs.docker.com/desktop/setup/install/windows-install/)
 2. Rodar o comando docker:  docker run -d -p 9000:9000 --name=sonarqube sonarqube:9.9-community
 3. Ir na página principal do SonarQube (http://localhost:9000) e configurar usuário e senha
 4. Depois Ir na url: http://localhost:9000/projects/create e criar um projeto; criei como por ex: projeto-financial-api
 5. Gerar o token dele, por ex: 999999999999999999999999
 6. Rodar o comando mvn:   mvn clean verify sonar:sonar "-Dsonar.projectKey=projeto-financial-api" "-Dsonar.host.url=http://localhost:9000" "-Dsonar.login=SEU_TOKEN_GERADO_COLOCAR_AQUI"
-
 
 # Requisitos técnicos:
 
