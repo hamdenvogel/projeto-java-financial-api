@@ -51,6 +51,11 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - Docker
 - Sonar (versão 9.9 community)
 
+# IDE´s utilizadas
+
+- Google AntiGrativy
+- Intellij Ultimate
+
 # Testes automatizados - JUnit 5/Mockito
 
 - Testes unitários (CreditoServiceTest, CreditoRepositoryTest, CreditoMapperTest, etc.)
