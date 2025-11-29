@@ -6,6 +6,16 @@ Sistema que implementa a API de Créditos Constituídos
 
 API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créditos constituídos. A API fornece informações essenciais como número do crédito constituído, número da NFS-e, data da constituição do crédito, valor do ISSQN, tipo do crédito, entre outros atributos.
 
+# Configuração do Sonar:
+
+1. Instalar o Docker
+2. Rodar o comando docker:  docker run -d -p 9000:9000 --name=sonarqube sonarqube:9.9-community
+3. Ir na página principal do SonarQube (http://localhost:9000) e configurar usuário e senha
+4. Depois Ir na url: http://localhost:9000/projects/create e criar um projeto; criei como por ex: projeto-financial-api
+5. Gerar o token dele, por ex: 999999999999999999999999
+6. Rodar o comando mvn:   mvn clean verify sonar:sonar "-Dsonar.projectKey=projeto-financial-api" "-Dsonar.host.url=http://localhost:9000" "-Dsonar.login=SEU_TOKEN_GERADO_COLOCAR_AQUI"
+
+
 # Requisitos técnicos:
 
 - Java 21
@@ -18,6 +28,7 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - Mockito
 - Hibernate
 - Postgres / H2 Database
+- SonarQube 9.9-community
 
 # Código-fonte Java:
 
@@ -38,6 +49,8 @@ API RESTful utilizando Java Spring Boot para a consulta e gerenciamento de créd
 - JUnit (versão 5)
 - Spring Data JPA (Repository)
 - Postgres (Runtime) / H2 (Runtime)
+- Docker
+- Sonar (versão 9.9 community)
 
 # Testes automatizados - JUnit 5/Mockito
 
